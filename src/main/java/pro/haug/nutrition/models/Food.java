@@ -1,5 +1,7 @@
 package pro.haug.nutrition.models;
 
+import pro.haug.nutrition.repositories.EntityRepository;
+
 import javax.persistence.*;
 
 @Entity
@@ -8,8 +10,9 @@ public class Food {
     @GeneratedValue(strategy= GenerationType.AUTO)
     private Integer id;
     private String name;
-    @Enumerated(EnumType.STRING)
-    private EntitySizeTypes entitySizeType;
+
+    @ManyToOne
+    private EntitySizeType entitySizeType;
 
     public Integer getId() {
         return id;
@@ -27,11 +30,11 @@ public class Food {
         this.name = name;
     }
 
-    public EntitySizeTypes getEntitySizeType() {
+    public EntitySizeType getEntitySizeType() {
         return entitySizeType;
     }
 
-    public void setEntitySizeType(EntitySizeTypes entitySizeType) {
+    public void setEntitySizeType(EntitySizeType entitySizeType) {
         this.entitySizeType = entitySizeType;
     }
 
