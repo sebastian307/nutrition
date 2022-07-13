@@ -35,4 +35,5 @@ public class RecipeIngredientsId implements Serializable {
     public void setFoodId(int foodId) {
         this.foodId = foodId;
     }
+
 }
