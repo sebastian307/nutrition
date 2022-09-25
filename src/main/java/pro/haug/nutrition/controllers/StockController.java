@@ -72,7 +72,6 @@ public class StockController {
 
     @GetMapping(path="/all")
     public @ResponseBody Iterable<Stock> getAllStocks() {
-        // This returns a JSON or XML with the stocks
         return stockRepository.findAll();
     }
 }
