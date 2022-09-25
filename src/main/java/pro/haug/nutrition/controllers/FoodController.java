@@ -20,24 +20,26 @@ public class FoodController {
     private EntityRepository entityRepository;
 
     @PostMapping(path="/add")
-    public @ResponseBody String addNewFood (@RequestParam String name
-            , @RequestParam String sizeType) {
-
-
+    public @ResponseBody int addNewFood (@RequestBody Food food) {
+        String sizeType = food.getEntitySizeType().getEntitySizeType().toString();
+        String name = food.getName();
+        System.out.println(sizeType);
+        System.out.println(name);
         List<EntitySizeType> sizeTypes = entityRepository.findByEntitySizeType(sizeType);
+        System.out.println(sizeTypes.size());
         if (sizeTypes.size()>0){
             Food newFood = new Food();
             newFood.setName(name);
             newFood.setEntitySizeType(sizeTypes.get(0));
             foodRepository.save(newFood);
-            return "Saved";
+            return 200;
         }
 
-        return "Error";
+        return 400;
     }
 
-    @PostMapping(path="/delete")
-    public @ResponseBody int deleteById (@RequestBody int id) {
+    @DeleteMapping(path="/delete/{id}")
+    public @ResponseBody int deleteById (@PathVariable int id) {
         if (foodRepository.existsById(id)) {
             foodRepository.deleteById(id);
             return Response.SC_ACCEPTED;
@@ -46,7 +48,7 @@ public class FoodController {
     }
 
 
-    @PostMapping(path="/search")
+    @GetMapping(path="/search")
     public @ResponseBody Iterable<Food> findByName (@RequestParam String name) {
         return foodRepository.findByNameContaining(name);
     }
