@@ -21,11 +21,11 @@ public class FoodController {
 
     @PostMapping(path="/add")
     public @ResponseBody int addNewFood (@RequestBody Food food) {
-        String sizeType = food.getEntitySizeType().getEntitySizeType().toString();
+        String sizeType = food.getEntitySizeType().getName();
         String name = food.getName();
         System.out.println(sizeType);
         System.out.println(name);
-        List<EntitySizeType> sizeTypes = entityRepository.findByEntitySizeType(sizeType);
+        List<EntitySizeType> sizeTypes = entityRepository.findByName(sizeType);
         System.out.println(sizeTypes.size());
         if (sizeTypes.size()>0){
             Food newFood = new Food();
@@ -66,7 +66,7 @@ public class FoodController {
     @PostMapping(path="/sizeOptions/add")
     public @ResponseBody EntitySizeType addSizeOption(@RequestParam String sizeType) {
         EntitySizeType newEntitySizeType = new EntitySizeType();
-        newEntitySizeType.setEntitySizeType(sizeType);
+        newEntitySizeType.setName(sizeType);
         return entityRepository.save(newEntitySizeType);
     }
 }

@@ -14,9 +14,12 @@ public class Stock {
     private Integer id;
 
     
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "food_id", referencedColumnName = "id")
+    @ManyToOne
     private Food food;
+
+    @Temporal(TemporalType.DATE)
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+    private Date dateOfPurchase;
 
     @Temporal(TemporalType.DATE)
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
@@ -73,5 +76,13 @@ public class Stock {
 
     public void setPrice(BigDecimal price) {
         this.price = price;
+    }
+
+    public Date getDateOfPurchase() {
+        return dateOfPurchase;
+    }
+
+    public void setDateOfPurchase(Date dateOfPurchase) {
+        this.dateOfPurchase = dateOfPurchase;
     }
 }

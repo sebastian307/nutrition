@@ -11,7 +11,7 @@ public class EntitySizeType {
     @GeneratedValue(strategy= GenerationType.AUTO)
     private Integer id;
 
-    private String entitySizeType;
+    private String name;
 
     public Integer getId() {
         return id;
@@ -21,11 +21,11 @@ public class EntitySizeType {
         this.id = id;
     }
 
-    public String getEntitySizeType() {
-        return entitySizeType;
+    public String getName() {
+        return name;
     }
 
-    public void setEntitySizeType(String entitySizeType) {
-        this.entitySizeType = entitySizeType;
+    public void setName(String name) {
+        this.name = name;
     }
 }
